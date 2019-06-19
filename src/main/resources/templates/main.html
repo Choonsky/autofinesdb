@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base :: header(~{::title})">
+    <title>Сервлет работы с БД автоштрафов</title>
+</head>
+
+<body class="bg-light">
+
+<div class="container align-content-center text-center pt-5">
+    <h3 class="mb-3 pt-5 font-weight-normal align-content-center">Сервлет работы с БД автоштрафов</h3>
+
+    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#allFines">Посмотреть все штрафы</button>
+    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#allTypes">Посмотреть все типы штрафов</button>
+    <br>
+    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#allCars">Посмотреть все автомобили</button>
+    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#allDrivers">Посмотреть всех водителей</button>
+
+    <!-- Find by Name -->
+    <form action="#" th:action="@{/byname/}" method="post" >
+        <input name="searchString" list="fullnames" type="text" class="form-control input-name" placeholder="Полное имя" required>
+        <button type="submit" name="toSave" class="btn btn-primary">Искать!</button>
+    </form>
+    <!-- End Find by Name -->
+
+    <!-- Find by Plate -->
+    <form action="#" th:action="@{/byplate/}" method="post" >
+        <input name="searchString" list="plates" type="text" class="form-control input-name" placeholder="Госномер" required>
+        <button type="submit" name="toSave" class="btn btn-primary">Искать!</button>
+    </form>
+    <!-- End Find by Plate -->
+
+    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#finesPopular">Посмотреть частоту штрафов</button>
+
+    <!-- Modal All Fines -->
+    <div class="modal fade bd-example-modal-lg" id="allFines" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-labelledby="Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Все штрафы базы</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&cross;</span>
+                    </button>
+                </div>
+        <!-- Fines List Table -->
+        <div class="row">
+            <table class="table table-hover table-sm">
+                <thead class ="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Дата штрафа</th>
+                    <th scope="col">Сумма, р.</th>
+                    <th scope="col">ID авто</th>
+                    <th scope="col">ID типа</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="fine : ${fines}" th:id="${fine.id}">
+                    <td th:text="${fine.id}">ID</td>
+                    <td th:text="${fine.date}">01-01-2000</td>
+                    <td class="text-right" th:text="${fine.sum}">100</td>
+                    <td th:text="${fine.car.getId()}">000</td>
+                    <td th:text="${fine.type.getId()}">000</td>
+                </tr>
+            </table>
+        </div>
+        <!-- Fines List Table END -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal All Fines -->
+
+    <!-- Modal All Types -->
+    <div class="modal fade bd-example-modal-lg" id="allTypes" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-labelledby="Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Все типы штрафов базы</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&cross;</span>
+                    </button>
+                </div>
+                <!-- Types List Table -->
+                <div class="row">
+                    <table class="table table-hover table-sm">
+                        <thead class ="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Описание типа штрафа</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="type : ${types}" th:id="${type.id}">
+                            <td th:text="${type.id}">ID</td>
+                            <td class="text-left" th:text="${type.description}">descr</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Types List Table END -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal All Types -->
+
+    <!-- Modal All Cars -->
+    <div class="modal fade bd-example-modal-lg" id="allCars" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-labelledby="Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Все автомобили базы</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&cross;</span>
+                    </button>
+                </div>
+                <!-- Cars List Table -->
+                <div class="row">
+                    <table class="table table-hover table-sm">
+                        <thead class ="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Госномер</th>
+                            <th scope="col">Марка</th>
+                            <th scope="col">Модель</th>
+                            <th scope="col">ID владельца</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="car : ${cars}" th:id="${car.id}">
+                            <td th:text="${car.id}">ID</td>
+                            <td th:text="${car.plate}">aa000a00</td>
+                            <td th:text="${car.type}">Type</td>
+                            <td th:text="${car.model}">Model</td>
+                            <td th:text="${car.driver.getId()}">000</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Cars List Table END -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal All Cars -->
+
+    <!-- Modal All Drivers -->
+    <div class="modal fade bd-example-modal-lg" id="allDrivers" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-labelledby="Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Все владельцы автомобилей</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&cross;</span>
+                    </button>
+                </div>
+                <!-- Drivers List Table -->
+                <div class="row">
+                    <table class="table table-hover table-sm">
+                        <thead class ="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Номер паспорта</th>
+                            <th scope="col">Полное имя</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="driver : ${drivers}" th:id="${driver.id}">
+                            <td th:text="${driver.id}">ID</td>
+                            <td th:text="${driver.passport}">1111222222</td>
+                            <td th:text="${driver.fullname}">Полное имя</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Drivers List Table END -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal All Drivers -->
+
+    <div th:replace="~{base :: footer}"></div>
+
+    <!-- Fullnames Datalist -->
+    <datalist th:fragment="fullnames" id="fullnames">
+        <option th:each="driver : ${drivers}" th:text="${driver.fullname}"></option>
+    </datalist>
+    <!-- Fullnames Datalist END -->
+
+    <!-- Plates Datalist -->
+    <datalist th:fragment="plates" id="plates">
+        <option th:each="car : ${cars}" th:text="${car.plate}"></option>
+    </datalist>
+    <!-- Plates Datalist END -->
+
+</div>
+</body>
+</html>

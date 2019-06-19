@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base :: header(~{::title})">
+    <title>Сервлет работы с БД автоштрафов</title>
+</head>
+
+<body class="bg-light">
+
+<div class="container align-content-center text-center pt-5">
+    <h3 class="mb-3 pt-5 font-weight-normal align-content-center">Сервлет работы с БД автоштрафов</h3>
+    <h3 class="mb-3 pt-5 font-weight-normal align-content-center">Мы искали: <span th:text="${searchString}"></span>.</h3>
+
+        <!-- Fines List Table -->
+        <div class="row">
+            <table class="table table-hover table-sm">
+                <thead class ="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Дата штрафа</th>
+                    <th scope="col">Сумма, р.</th>
+                    <th scope="col">Госномер</th>
+                    <th scope="col">ФИО владельца</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="fine : ${finesResult}" th:id="${fine.id}">
+                    <td th:text="${fine.id}">ID</td>
+                    <td th:text="${fine.date}">01-01-2000</td>
+                    <td class="text-right" th:text="${fine.sum}">100</td>
+                    <td th:text="${fine.car.plate}">000</td>
+                    <td th:text="${fine.car.driver.fullname}">000</td>
+                </tr>
+            </table>
+            <button class="btn btn-lg btn-success mb-5" onclick="window.location.href = '../main';">Новый поиск</button>
+
+        </div>
+</body>
+</html>

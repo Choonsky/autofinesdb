@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base :: header(~{::title})">
+    <title>Сервлет работы с БД автоштрафов</title>
+</head>
+
+<body class="bg-light">
+
+<div class="container align-content-center text-center pt-5">
+    <h3 class="mb-3 pt-5 font-weight-normal align-content-center">Сервлет работы с БД автоштрафов</h3>
+
+    <button class="btn btn-lg btn-success mb-5" onclick="window.location.href = '../main';">Главная страница</button>
+
+    <div th:replace="~{base :: footer}"></div>
+</div>
+</body>
+</html>
