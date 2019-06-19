@@ -20,16 +20,20 @@
     <!-- Find by Name -->
     <form action="#" th:action="@{/byname/}" method="post" >
         <input name="searchString" list="fullnames" type="text" class="form-control input-name" placeholder="Полное имя" required>
+        <br>
         <button type="submit" name="toSave" class="btn btn-primary">Искать!</button>
     </form>
     <!-- End Find by Name -->
+    <br>
 
     <!-- Find by Plate -->
     <form action="#" th:action="@{/byplate/}" method="post" >
         <input name="searchString" list="plates" type="text" class="form-control input-name" placeholder="Госномер" required>
+        <br>
         <button type="submit" name="toSave" class="btn btn-primary">Искать!</button>
     </form>
     <!-- End Find by Plate -->
+    <br>
 
     <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#finesPopular">Посмотреть частоту штрафов</button>
 
