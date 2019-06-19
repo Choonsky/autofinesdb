@@ -10,5 +10,4 @@ import java.util.ArrayList;
 @Repository
 public interface TypeRepo extends JpaRepository<Type, Integer>
 {
-    ArrayList<Type> findFirst5OrderByQty();
 }

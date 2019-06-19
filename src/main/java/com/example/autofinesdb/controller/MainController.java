@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.format.DateTimeFormatter;
-
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 @Controller
 public class MainController {
@@ -46,8 +47,9 @@ public class MainController {
         fines.forEach(fine -> {
             fine.getType().setQty(fine.getType().getQty() + 1);
         });
-        List<Type> typesPopular = new ArrayList<>(typeRepo.findFirst5OrderByQty());
-        modelAndView.addObject("typesPopular", typesPopular);
+        List<Type> typesPopular = new ArrayList<>(typeRepo.findAll());
+        Collections.sort(typesPopular, Comparator.comparing(Type::getQty).reversed());
+        modelAndView.addObject("typesPopular", typesPopular.subList(0,5));
 
 // fetching all cars...
         List<Car> cars = new ArrayList<>(carRepo.findAll());
