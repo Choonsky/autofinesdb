@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>autofinesdb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>autofinesdb</name>
     <description>Мини-сервлет работы с базой данных автоштрафов</description>
 
