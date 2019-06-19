@@ -20,6 +20,7 @@ public class Type {
     private int id;
 
     private String description;
+    private Integer qty;
 
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Fine> fines;
@@ -53,6 +54,14 @@ public class Type {
 
     public void setFines(Set<Fine> fines) {
         this.fines = fines;
+    }
+
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
     }
 
     @Override

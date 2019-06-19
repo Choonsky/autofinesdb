@@ -35,7 +35,7 @@
     <!-- End Find by Plate -->
     <br>
 
-    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#finesPopular">Посмотреть частоту штрафов</button>
+    <button class="btn btn-lg btn-success mb-5" type="submit" data-toggle="modal" data-target="#finesPopular">Пятёрка популярных штрафов</button>
 
     <!-- Modal All Fines -->
     <div class="modal fade bd-example-modal-lg" id="allFines" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
@@ -103,6 +103,42 @@
                         <tr th:each="type : ${types}" th:id="${type.id}">
                             <td th:text="${type.id}">ID</td>
                             <td class="text-left" th:text="${type.description}">descr</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Types List Table END -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal All Types -->
+
+    <!-- Modal 5 Popular Types -->
+    <div class="modal fade bd-example-modal-lg" id="finesPopular" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-labelledby="Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Пять самых популярных штрафов</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&cross;</span>
+                    </button>
+                </div>
+                <!-- Types List Table -->
+                <div class="row">
+                    <table class="table table-hover table-sm">
+                        <thead class ="thead-dark">
+                        <tr>
+                            <th scope="col">Описание типа штрафа</th>
+                            <th scope="col">Выписан раз</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="type : ${typesPopular}" th:id="${type.id}">
+                            <td class="text-left" th:text="${type.description}">descr</td>
+                            <td th:text="${type.qty}">ID</td>
                         </tr>
                     </table>
                 </div>

@@ -42,6 +42,13 @@ public class MainController {
         Collections.sort(types, Comparator.comparing(Type::getId));
         modelAndView.addObject("types", types);
 
+// fetching popular types...
+        fines.forEach(fine -> {
+            fine.getType().setQty(fine.getType().getQty() + 1);
+        });
+        List<Type> typesPopular = new ArrayList<>(typeRepo.findFirst5OrderByQty());
+        modelAndView.addObject("typesPopular", typesPopular);
+
 // fetching all cars...
         List<Car> cars = new ArrayList<>(carRepo.findAll());
         modelAndView.addObject("cars", cars);
